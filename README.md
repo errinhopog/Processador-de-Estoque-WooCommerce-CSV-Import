@@ -8,313 +8,72 @@
 
 [![Versão](https://img.shields.io/badge/versão-4.1.0-blue.svg)](https://github.com/)> **Sistema profissional de conversão CSV → WooCommerce com detecção inteligente de marcas e pesos****[🇧🇷 Versão em Português](docs/pt-BR/README.md)** | **[🇺🇸 English Version](README.md)**
 
-[![Node](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen.svg)](https://nodejs.org/)
+# Processador de Estoque — WooCommerce (v4.1)
 
-[![Licença](https://img.shields.io/badge/licença-MIT-green.svg)](LICENSE)
+Ferramenta para converter arquivos CSV exportados do sistema Athos ERP para o formato de importação do WooCommerce. Faz detecção automática de marcas, extração de peso/volume e gera arquivos CSV prontos para importação.
 
-[![Status](https://img.shields.io/badge/status-produção-success.svg)]()
+Principais características
+- Detecção automática de marcas (suporte a 160+ marcas)
+- Extração inteligente de peso/volume a partir do nome do produto (ex.: 15kg, 500g, 750ml)
+- Geração de arquivo CSV geral para importação no WooCommerce
+- Geração opcional de arquivos separados por categoria
+- Formatação de nomes (Title Case)
+- Atributo “Marca” incluído como atributo e meta
+- Validações básicas (preço mínimo, estoque, SKU) e logs de execução
 
-[![Versão](https://img.shields.io/badge/versão-4.1.0-blue.svg)](https://github.com/)A professional Node.js application specifically designed to convert inventory data from **Athos ERP** system to **WooCommerce**-compatible CSV format with automatic brand detection and weight extraction.
+Requisitos
+- Node.js v18 ou superior
+- npm (ou yarn)
 
-Converte CSV de estoque para formato WooCommerce com **detecção automática de 162+ marcas** e **extração inteligente de peso**.
+Instalação rápida
+1. Copie o arquivo de configuração de exemplo:
 
-[![Node](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen.svg)](https://nodejs.org/)
+   - Windows (PowerShell):
+     copy config.example.json config.json
 
----
+   - Linux/macOS:
+     cp config.example.json config.json
 
-[![Licença](https://img.shields.io/badge/licença-MIT-green.svg)](LICENSE)> **Note**: This tool is specifically built for Athos ERP CSV exports. If you use a different ERP system, you may need to adapt the CSV parsing logic.
+2. Instale dependências:
 
-## 📋 Índice
+   npm install
 
-[![Status](https://img.shields.io/badge/status-produção-success.svg)]()
+Uso
+- Coloque seu arquivo de entrada (por padrão `athos.csv`) na raiz do projeto ou atualize o caminho em `config.json`.
+- Execute o processador:
 
-- [Recursos](#-recursos)
+  - No Windows: dê um duplo clique em `processarEstoque-v4.1.bat` ou rode no PowerShell:
 
-- [Instalação](#-instalação-rápida)## Features
+    node processador-estoque-v4.1.js
 
-- [Uso](#-uso)
+Arquivos gerados (padrão)
+- `saida_estoque/woocommerce_import_TODOS_YYYY-MM-DDTHH-mm-ss.csv` — arquivo único com todos os produtos para importar no WooCommerce
+- `saida_estoque/[CATEGORIA]_YYYY-MM-DDTHH-mm-ss.csv` — arquivos por categoria (opcional)
+- `saida_estoque/metadata_v4.json` — estatísticas do processamento
+- `saida_estoque/log_execucao_v4_[timestamp].json` — log detalhado do processamento
 
-- [Configuração](#-configuração)## 📋 Índice
+Configuração
+- Abra `config.example.json`, ajuste as opções desejadas e salve como `config.json`. Principais chaves:
+  - `arquivos.entrada` — caminho do CSV de entrada (padrão: `athos.csv`)
+  - `arquivos.pastaSaida` — pasta de saída (padrão: `saida_estoque`)
+  - `processamento.precoMinimo` — validação de preço mínimo
+  - `processamento.incluirProdutosSemEstoque` — incluir produtos com estoque zero
 
-- [Exemplos](#-exemplos)
+Boas práticas
+- Faça backup do CSV original antes de processar.
+- Teste com um pequeno subconjunto antes de processar o arquivo completo.
 
-- [Documentação](#-documentação)- **Brand Detection**: Automatically identifies 119+ brands from product titles
+Contribuição
+- Para adicionar novas marcas ou melhorias, veja `CONTRIBUTING.md`. Normalmente as marcas estão listadas na variável `marcasConhecidas` no arquivo principal do processador.
 
+Licença
+- Este projeto está licenciado sob a licença MIT. Veja o arquivo `LICENSE`.
 
+Exemplos e arquivos de referência
+- `EXEMPLO-CSV-CONVERTIDO.csv` — exemplo de saída já convertido
 
----- [Recursos](#-recursos)- **Weight Extraction**: Intelligently extracts weight information (kg, g, ml, liters)
-
-
-
-## ✨ Recursos- [Instalação](#-instalação-rápida)- **Smart Formatting**: Converts product names to Title Case with proper capitalization
-
-
-
-### 🎯 Detecção Inteligente- [Uso](#-uso)- **Category Organization**: Generates separate CSV files per category
-
-- ✅ **162+ Marcas** reconhecidas automaticamente (Royal Canin, Alcon, Premier, Tetra, etc.)
-
-- ✅ **Peso/Volume** extraído do nome (15kg, 500g, 300ml, etc.)- [Configuração](#-configuração)- **WooCommerce Ready**: Direct import compatibility with complete field mapping
-
-- ✅ **Formatação automática** de nomes (Title Case)
-
-- ✅ **Atributo "Marca"** filtrável no WooCommerce- [Documentação](#-documentação)- **Performance**: Processes 4000+ products in under 1 second
-
-
-
-### 📊 Validação e Qualidade- [Changelog](#-changelog)- **Comprehensive Logging**: Detailed execution logs with statistics and metrics
-
-- ✅ **Validação de dados** (preço mínimo, estoque, SKU)
-
-- ✅ **Alertas automáticos** (preço < custo, valores anormais)- [Licença](#-licença)
-
-- ✅ **Logs detalhados** com rastreamento completo
-
-- ✅ **Performance:** ~7.500 produtos/segundo## Version 4.0 Highlights
-
-
-
-### 🛒 WooCommerce Ready## ✨ Recursos
-
-- ✅ **100% compatível** com importador WooCommerce
-
-- ✅ **Descrições HTML** otimizadas para SEO- Brand database with 119+ popular brands across multiple categories
-
-- ✅ **Meta fields** para controle interno (custo, margem, estoque mínimo)
-
-- ✅ **Export geral + por categoria** (arquivos separados)### 🎯 Detecção Inteligente- Intelligent weight parsing from product titles
-
-
-
----- ✅ **160+ Marcas** reconhecidas automaticamente (Royal Canin, Alcon, Premier, etc.)- Clean file naming without version suffixes
-
-
-
-## 🚀 Instalação Rápida- ✅ **Peso/Volume** extraído do nome (kg, g, ml, litros)- Enhanced product descriptions with brand and weight information
-
-
-
-### 1. Pré-requisitos- ✅ **Formatação automática** de nomes e categorias (Title Case)- Automatic tag generation including brand names
-
-- Node.js v18.0.0 ou superior
-
-- npm (incluído com Node.js)- ✅ **Tags inteligentes** baseadas em marca e características- Detailed metadata and execution reports
-
-
-
-### 2. Instalar dependências
-
-```bash
-
-npm install### 📊 Validação e Qualidade## Requirements
-
-```
-
-- ✅ **Validação de dados** (preço mínimo, estoque, SKU)
-
-### 3. Configurar
-
-```bash- ✅ **Alertas automáticos** (preço < custo, valores anormais)- **Athos ERP** system with CSV export capability
-
-# Windows
-
-copy config.example.json config.json- ✅ **Logs detalhados** com rastreamento completo- Node.js 14.x or higher
-
-
-
-# Linux/Mac- ✅ **Estatísticas em tempo real** durante processamento- npm or yarn package manager
-
-cp config.example.json config.json
-
-```- WooCommerce store (WordPress)
-
-
-
-### 4. Adicionar CSV### 🛒 WooCommerce Ready
-
-Coloque seu arquivo `athos.csv` na pasta raiz (ou configure outro nome em `config.json`).
-
-- ✅ **100% compatível** com importador WooCommerce## Installation
-
----
-
-- ✅ **Atributos customizados** (Marca visível na página do produto)
-
-## 💻 Uso
-
-- ✅ **Descrições SEO** otimizadas automaticamente```bash
-
-### Windows (Recomendado)
-
-```bash- ✅ **Meta fields** para controle interno (custo, margem, estoque mínimo)npm install
-
-# Duplo clique ou execute:
-
-processarEstoque-v4.1.bat```
-
-```
-
-### 📁 Organização
-
-### Node.js
-
-```bash- ✅ **Export geral** com todos os produtos## Configuration
-
-node processador-estoque-v4.1.js
-
-```- ✅ **Export por categoria** (arquivos separados)
-
-
-
-### Visualizar Logs- ✅ **Metadata JSON** com estatísticas completasEdit `config.json` to customize processing parameters:
-
-```bash
-
-# Duplo clique ou execute:- ✅ **Logs JSON** para auditoria
-
-verLogs.bat
-
-``````json
-
-
-
----## 🚀 Instalação Rápida{
-
-
-
-## ⚙️ Configuração  "arquivos": {
-
-
-
-### config.json - Opções Principais### 1. Pré-requisitos    "entrada": "athos.csv",
-
-
-
-```json```bash    "pastaSaida": "saida_estoque"
-
-{
-
-  "arquivos": {Node.js v18.0.0 ou superior  },
-
-    "entrada": "athos.csv",              // ← Mude o nome do CSV aqui
-
-    "pastaSaida": "saida_estoque"npm (incluído com Node.js)  "processamento": {
-
-  },
-
-  "processamento": {```    "precoMinimo": 0,
-
-    "precoMinimo": 0.01,
-
-    "estoqueMinimo": 0,    "estoqueMinimo": 0,
-
-    "incluirProdutosSemEstoque": true
-
-  },### 2. Instalar dependências    "incluirProdutosSemEstoque": true
-
-  "woocommerce": {
-
-    "publicarAutomaticamente": false,```bash  },
-
-    "visibilidadeCatalogo": "visible",
-
-    "permitirAvaliacoes": truenpm install  "woocommerce": {
-
-  }
-
-}```    "publicarAutomaticamente": false,
-
-```
-
-    "visibilidadeCatalogo": "visible",
-
-### 📝 Personalizar Nome do CSV
-
-### 3. Configurar    "statusTributario": "taxable",
-
-Quer usar outro arquivo CSV? É só mudar em `config.json`:
-
-```bash    "classeImposto": "",
-
-```json
-
-{# Windows    "permitirBackorders": false,
-
-  "arquivos": {
-
-    "entrada": "meu_estoque.csv"      // ← Qualquer nome aquicopy config.example.json config.json    "venderIndividualmente": false,
-
-  }
-
-}    "permitirAvaliacoes": true
-
-```
-
-# Linux/Mac  }
-
-**Caminhos aceitos:**
-
-- ✅ `athos.csv` (raiz do projeto)cp config.example.json config.json}
-
-- ✅ `dados/estoque.csv` (subpasta)
-
-- ✅ `C:\Documentos\estoque.csv` (caminho absoluto)``````
-
-
-
----
-
-
-
-## 📊 Exemplos### 4. Adicionar arquivo CSV## Usage
-
-
-
-### Arquivo de Entrada (athos.csv)Coloque seu arquivo `athos.csv` na pasta raiz (ou configure outro nome em `config.json`).
-
-```csv
-
-SKU,Nome,Estoque,Estoque_Minimo,Preco,Custo### Command Line
-
-12345,RACAO GOLDEN ADULTO 15KG,150,10,189.90,135.50
-
-23456,ALCON LABCON TEST PH,45,5,32.90,22.50## 💻 Uso
-
-```
-
-```bash
-
-### Arquivo de Saída (woocommerce_import_TODOS.csv)
-
-```csv### Windows (Recomendado)node processador-estoque-v4.js
-
-SKU,Name,Published,Weight (kg),Regular price,Categories,Attribute 1 name,Attribute 1 value(s),...
-
-12345,Ração Golden Adulto 15Kg | Marca: Golden,1,15.000,189.90,Pet,Marca,Golden,...```bash```
-
-23456,Alcon Labcon Test Ph | Marca: Alcon,1,,32.90,Aquarismo,Marca,Alcon,...
-
-```# Duplo clique ou execute:
-
-
-
-**📁 Ver exemplos completos:** [EXEMPLO-CSV-CONVERTIDO.csv](EXEMPLO-CSV-CONVERTIDO.csv)processarEstoque-v4.1.bat### Windows Batch File
-
-
-
-**Resultados:**```
-
-- ✅ **Marca detectada:** Golden, Alcon
-
-- ✅ **Peso extraído:** 15kg (produto 1)```bash
-
-- ✅ **Nome formatado:** Title Case
-
-- ✅ **Atributo "Marca":** Filtrável no WooCommerce### Node.jsprocessarEstoque-v4.bat
-
-- ✅ **Descrição HTML:** Completa e SEO-friendly
-
-```bash```
+Contato
+- Ferramenta destinada ao uso interno da AquaFlora Agroshop. Para dúvidas, abra uma issue ou entre em contato com a equipe de desenvolvimento.
 
 ---
 
