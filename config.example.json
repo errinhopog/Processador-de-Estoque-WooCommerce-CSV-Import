@@ -1,0 +1,29 @@
+{
+  "arquivos": {
+    "entrada": "athos.csv",
+    "pastaSaida": "saida_estoque"
+  },
+  "processamento": {
+    "precoMinimo": 0,
+    "estoqueMinimo": 0,
+    "incluirProdutosSemEstoque": true
+  },
+  "validacoes": {
+    "skuObrigatorio": false
+  },
+  "woocommerce": {
+    "publicarAutomaticamente": false,
+    "visibilidadeCatalogo": "visible",
+    "statusTributario": "taxable",
+    "classeImposto": "",
+    "permitirBackorders": false,
+    "venderIndividualmente": false,
+    "permitirAvaliacoes": true
+  },
+  "saida": {
+    "criarArquivoGeral": true,
+    "criarArquivosPorCategoria": true,
+    "incluirMetadata": true,
+    "formatoData": false
+  }
+}
