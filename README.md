@@ -1,4 +1,4 @@
-# 🚀 Processador de Estoque WooCommerce v4.1# 🚀 Processador de Estoque WooCommerce v4.1# 🚀 Processador de Estoque WooCommerce v4.1# Athos to WooCommerce Converter
+🚀 Processador de Estoque WooCommerce v4.1# Athos to WooCommerce Converter
 
 
 
@@ -14,7 +14,7 @@
 
 [![Status](https://img.shields.io/badge/status-produção-success.svg)]()
 
-[![Versão](https://img.shields.io/badge/versão-4.1.0-blue.svg)](https://github.com/)> **Sistema profissional de conversão CSV → WooCommerce com detecção inteligente de marcas e pesos****[🇧🇷 Versão em Português](docs/pt-BR/README.md)** | **[🇺🇸 English Version](README.md)**
+[![Versão](https://img.shields.io/badge/versão-4.1.0-blue.svg)](https://github.com/)> **Sistema profissional de conversão CSV → WooCommerce com detecção inteligente de marcas e pesos****[🇧🇷 Versão em Português](docs/pt-BR/README.md)** 
 
 Converte arquivos CSV exportados do **Athos ERP** para formato de importação do **WooCommerce** com detecção automática de 160+ marcas e extração inteligente de peso/volume.
 
